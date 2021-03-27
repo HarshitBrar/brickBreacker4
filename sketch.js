@@ -3,7 +3,7 @@ var ball,paddle;
 var brick,brick1,brick2;
 var edges;
 var brickGroup;
-var backGroundImg,ballImg,paddleImg;
+var backGroundImg,ballImg,paddleImg,endImage;
 var gameState;
 var PLAY = 1;
 var START = 0;
@@ -15,7 +15,8 @@ function preload(){
   backGroundImg = loadImage("backGroundImg.jpg");
   ballImg = loadImage("ball.png");
   paddleImg = loadImage("paddle.png");
-  sound1 = loadSound("pop1.mp3")
+  sound1 = loadSound("pop1.mp3");
+  endImage = loadImage("END.jpg");
 }
 function setup() {
   createCanvas(800,500);
@@ -29,6 +30,7 @@ function setup() {
   ball.addImage(ballImg);
   ball.scale = 0.05
   end = createSprite(400,250,20,20);
+  end.addImage(endImage);
   end.visible = false;
   
   edges = createEdgeSprites();
