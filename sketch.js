@@ -9,13 +9,15 @@ var PLAY = 1;
 var START = 0;
 var END = 2;
 var life = 3;
-var end,endImg;
-var sound1;
+var theEnd,endImg;
+var sound1,sound2,sound3;
 function preload(){
   backGroundImg = loadImage("backGroundImg.jpg");
   ballImg = loadImage("ball.png");
   paddleImg = loadImage("paddle.png");
   sound1 = loadSound("pop1.mp3");
+  sound2 = loadSound("hit1.mp3");
+  sound3 = loadSound("life.mp3");
   endImage = loadImage("END.jpg");
 }
 function setup() {
@@ -29,9 +31,9 @@ function setup() {
   ball = createSprite(400,300,10,10);
   ball.addImage(ballImg);
   ball.scale = 0.05
-  end = createSprite(400,250,20,20);
-  end.addImage(endImage);
-  end.visible = false;
+  theEnd = createSprite(400,250,20,20);
+  theEnd.addImage(endImage);
+  theEnd.visible = false;
   
   edges = createEdgeSprites();
   brickGroup = new Group();
@@ -77,6 +79,7 @@ for(var i = 0;i < brickGroup.length;i = i + 1){
   }
 }
 if(ball.isTouching(paddle)){
+  sound2.play();
   ball.velocityY = Math.round(random(1,4))
   ball.velocityX = Math.round(random(-3,3))
 }
@@ -96,12 +99,14 @@ if(ball.isTouching(paddle)){
     brickGroup.destroyEach();
     paddle.destroy();
     ball.destroy();
-    end.visible = true;
+    theEnd.visible = true;
+    sound3.play();
+    sound3.end();
   }
   drawSprites();
 }
 function spawnBrick(){
- 
+
 }
 function keyPressed(){
   if(keyCode === LEFT_ARROW){
